@@ -27,7 +27,8 @@ document.getElementById('hamburger').addEventListener('click', () => {
 const skillMatrix = [
   { name: 'SEO Technical', cat: 'SEO', color: 'dot-accent' },
   { name: 'Content Brief', cat: 'SEO', color: 'dot-accent' },
-  { name: 'AI/GEO SEO', cat: 'SEO', color: 'dot-cyan' },
+  { name: 'GEO Score Calc', cat: 'AI/GEO', color: 'dot-cyan' },
+  { name: 'Citability Scorer', cat: 'AI/GEO', color: 'dot-cyan' },
   { name: 'Keyword Intent', cat: 'Research', color: 'dot-accent' },
   { name: 'Rank Tracking', cat: 'Ops', color: 'dot-green' },
   { name: 'GBP Local', cat: 'Local SEO', color: 'dot-green' },
@@ -42,7 +43,8 @@ const skillMatrix = [
   { name: 'Ops Cards', cat: 'Operations', color: 'dot-green' },
   { name: 'Weekly Report', cat: 'Reporting', color: 'dot-pink' },
   { name: 'Export Workspace', cat: 'Reporting', color: 'dot-green' },
-  { name: 'GEO Checklist', cat: 'AI Search', color: 'dot-cyan' },
+  { name: 'Module Guides', cat: 'UX', color: 'dot-pink' },
+  { name: 'GEO/AI Platform', cat: 'AI/GEO', color: 'dot-cyan' },
 ];
 
 function renderSkillGrid() {
@@ -59,25 +61,31 @@ renderSkillGrid();
 
 /* ==================== SEO AUDIT CHECKLIST (incl. GEO/AI) ==================== */
 const seoChecks = [
-  // Traditional SEO
-  { id: 'c1', label: 'Title tag 50-60 ký tự, có keyword', cat: 'On-page' },
-  { id: 'c2', label: 'Meta description 150-160 ký tự + CTA', cat: 'On-page' },
-  { id: 'c3', label: 'H1 duy nhất, chứa primary keyword', cat: 'On-page' },
-  { id: 'c4', label: 'URL slug ngắn, có keyword, no dấu', cat: 'Technical' },
-  { id: 'c5', label: 'Core Web Vitals pass (LCP<2.5s)', cat: 'Technical' },
-  { id: 'c6', label: 'Mobile responsive, no layout shift', cat: 'Technical' },
-  { id: 'c7', label: 'Canonical tag đúng', cat: 'Technical' },
-  { id: 'c8', label: 'Internal links ≥ 2 trang liên quan', cat: 'Content' },
-  { id: 'c9', label: 'Image có alt text chứa keyword', cat: 'Content' },
-  { id: 'c10', label: 'Schema markup (Article/FAQ/Local)', cat: 'Schema' },
-  { id: 'c11', label: 'Open Graph / Twitter Card đầy đủ', cat: 'Social' },
-  // GEO / AI Search (from geo-seo-claude framework)
-  { id: 'g1', label: 'Answer box format: câu hỏi + trả lời trực tiếp', cat: 'GEO/AI' },
-  { id: 'g2', label: 'Entities rõ ràng: tên, địa chỉ, số điện thoại', cat: 'GEO/AI' },
-  { id: 'g3', label: 'FAQ schema cho AI Overviews & ChatGPT', cat: 'GEO/AI' },
-  { id: 'g4', label: 'Nội dung có citation-worthy stats/data', cat: 'GEO/AI' },
-  { id: 'g5', label: 'Author bio + E-E-A-T signals rõ ràng', cat: 'GEO/AI' },
-  { id: 'g6', label: 'Ngôn ngữ tự nhiên, conversational query', cat: 'GEO/AI' },
+  // Traditional SEO — On-page
+  { id: 'c1', label: 'Title tag 50-60 ký tự, có keyword', cat: 'On-page', hint: 'Tránh duplicate title' },
+  { id: 'c2', label: 'Meta description 150-160 ký tự + CTA', cat: 'On-page', hint: 'Tác động CTR, không ranking' },
+  { id: 'c3', label: 'H1 duy nhất, chứa primary keyword', cat: 'On-page', hint: 'Chỉ 1 H1 mỗi trang' },
+  { id: 'c4', label: 'URL slug ngắn, có keyword, no dấu', cat: 'Technical', hint: 'VD: /dich-vu-seo-local' },
+  { id: 'c5', label: 'Core Web Vitals pass (LCP<2.5s)', cat: 'Technical', hint: 'Test tại PageSpeed Insights' },
+  { id: 'c6', label: 'Mobile responsive, no layout shift', cat: 'Technical', hint: 'CLS < 0.1 là pass' },
+  { id: 'c7', label: 'Canonical tag đúng', cat: 'Technical', hint: 'Self-referencing canonical' },
+  { id: 'c8', label: 'Internal links ≥ 2 trang liên quan', cat: 'Content', hint: 'Anchor text tự nhiên' },
+  { id: 'c9', label: 'Image có alt text chứa keyword', cat: 'Content', hint: 'Mô tả thực tế, không spam' },
+  { id: 'c10', label: 'Schema markup (Article/FAQ/Local)', cat: 'Schema', hint: 'Test tại schema.org/validator' },
+  { id: 'c11', label: 'Open Graph / Twitter Card đầy đủ', cat: 'Social', hint: 'og:title, og:image, og:desc' },
+  // GEO / AI Search — từ geoskills framework
+  { id: 'g1', label: 'Answer block: câu hỏi + trả lời ≤50 words', cat: 'GEO/AI', hint: 'Format trực tiếp để AI cite' },
+  { id: 'g2', label: 'GPTBot / ClaudeBot / PerplexityBot không bị block', cat: 'GEO/AI', hint: 'Check robots.txt' },
+  { id: 'g3', label: 'FAQ schema JSON-LD cho AI Overviews', cat: 'GEO/AI', hint: '3+ câu Q&A thực tế' },
+  { id: 'g4', label: 'Có số liệu, %, thống kê cụ thể', cat: 'GEO/AI', hint: 'Tăng 30% AI citation rate' },
+  { id: 'g5', label: 'Author bio + E-E-A-T signals + ngày publish', cat: 'GEO/AI', hint: 'Undated content ít được cite' },
+  { id: 'g6', label: 'Ngôn ngữ tự nhiên, trả lời đúng query', cat: 'GEO/AI', hint: 'Keyword stuffing giảm 10% GEO' },
+  // AI Platform specific — từ marketingskills/ai-seo
+  { id: 'ai1', label: 'llms.txt file tồn tại (robots.txt cho AI)', cat: 'AI Platform', hint: 'Mới — Gemini & Perplexity ưu tiên' },
+  { id: 'ai2', label: 'Organization schema đầy đủ (tên/SĐT/địa chỉ)', cat: 'AI Platform', hint: 'Gemini: 52% cite brand domains có schema' },
+  { id: 'ai3', label: 'Có Wikipedia / Wikidata entity', cat: 'AI Platform', hint: 'ChatGPT: Wikipedia = 47.9% citations' },
+  { id: 'ai4', label: 'Presence trên Trustpilot, G2, review sites', cat: 'AI Platform', hint: 'Perplexity: community signals quan trọng' },
+  { id: 'ai5', label: 'Brand mention nhất quán trên tất cả platform', cat: 'AI Platform', hint: '2.5x more likely to be cited nếu consistent' },
 ];
 
 function renderSeoChecklist() {
@@ -733,6 +741,176 @@ function showToast(msg) {
   setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .3s'; setTimeout(()=>t.remove(),300); }, 2500);
 }
 
+/* ==================== HELP GUIDE TOGGLE ==================== */
+function toggleGuide(module) {
+  const guide = document.getElementById(`guide-${module}`);
+  if (!guide) return;
+  guide.classList.toggle('visible');
+  // Scroll to guide smoothly
+  if (guide.classList.contains('visible')) {
+    setTimeout(() => guide.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+  }
+}
+
+/* ==================== GEO SCORE CALCULATOR ==================== */
+function calculateGeoScore() {
+  // Dimension configs: [ids, weight, label, color]
+  const dims = [
+    { ids: ['geo-t1','geo-t2','geo-t3','geo-t4','geo-t5'], weight: 20, label: '🔧 Technical', color: '#6366f1' },
+    { ids: ['geo-c1','geo-c2','geo-c3','geo-c4','geo-c5','geo-c6'], weight: 35, label: '✍️ Citability', color: '#06b6d4' },
+    { ids: ['geo-s1','geo-s2','geo-s3','geo-s4','geo-s5'], weight: 20, label: '🏗️ Schema', color: '#a78bfa' },
+    { ids: ['geo-b1','geo-b2','geo-b3','geo-b4','geo-b5'], weight: 25, label: '🏆 Brand', color: '#10b981' },
+  ];
+
+  let composite = 0;
+  const dimScores = [];
+  const issues = [];
+
+  dims.forEach(dim => {
+    const total = dim.ids.length;
+    const checked = dim.ids.filter(id => document.getElementById(id)?.checked).length;
+    const pct = Math.round((checked / total) * 100);
+    const weighted = Math.round(pct * dim.weight / 100);
+    composite += weighted;
+    dimScores.push({ label: dim.label, pct, color: dim.color });
+
+    // Issues
+    dim.ids.forEach(id => {
+      if (!document.getElementById(id)?.checked) {
+        const labelEl = document.querySelector(`label[for="${id}"] span, label input#${id} + span`);
+        const txt = document.querySelector(`#${id}`)?.closest('label')?.querySelector('span')?.textContent?.trim();
+        if (txt) {
+          const sev = dim.weight === 35 ? 'critical' : dim.weight === 25 ? 'high' : 'medium';
+          issues.push({ text: txt, sev });
+        }
+      }
+    });
+  });
+
+  // Grade
+  const grade = composite >= 80 ? 'A · Excellent' : composite >= 60 ? 'B · Good' : composite >= 40 ? 'C · Needs work' : 'D · Critical';
+  const numColor = composite >= 80 ? 'var(--green)' : composite >= 60 ? 'var(--cyan)' : composite >= 40 ? 'var(--orange)' : 'var(--red)';
+
+  // Render
+  const result = document.getElementById('geo-result');
+  result.classList.add('visible');
+  document.getElementById('geo-big-num').textContent = composite;
+  document.getElementById('geo-big-num').style.color = numColor;
+  document.getElementById('geo-big-grade').textContent = `/100 · ${grade}`;
+
+  // Breakdown bars
+  document.getElementById('geo-breakdown').innerHTML = dimScores.map(d => `
+    <div class="geo-bar-item">
+      <span class="geo-bar-label">${d.label}</span>
+      <div class="geo-bar-track"><div class="geo-bar-fill" style="width:${d.pct}%;background:${d.color}"></div></div>
+      <span class="geo-bar-val">${d.pct}</span>
+    </div>
+  `).join('');
+
+  // Top 6 issues
+  const sorted = issues.sort((a,b) => { const o={critical:0,high:1,medium:2}; return o[a.sev]-o[b.sev]; }).slice(0,6);
+  const icons = { critical:'🔴', high:'🟡', medium:'🔵' };
+  document.getElementById('geo-issues').innerHTML = sorted.length
+    ? sorted.map(i => `<div class="geo-issue-item ${i.sev}">${icons[i.sev]} ${i.text}</div>`).join('')
+    : '<div class="geo-issue-item medium">✅ Xuất sắc! Tất cả checkboxes đã hoàn thành.</div>';
+
+  result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  showToast(`GEO Score: ${composite}/100 — ${grade}`);
+}
+
+/* ==================== CONTENT CITABILITY SCORER ==================== */
+function scoreCitability() {
+  const text = document.getElementById('cit-text')?.value?.trim() || '';
+  if (text.length < 50) { showToast('⚠️ Paste nội dung bài viết trước (tối thiểu 50 ký tự)'); return; }
+
+  const lc = text.toLowerCase();
+  const words = text.split(/\s+/).length;
+  const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+
+  // 6 metrics from geoskills geo-fix-content
+  const scores = [
+    {
+      label: 'Answer Block',
+      max: 20,
+      score: (() => {
+        // Has direct answer pattern: ?...\n or short paragraph
+        const hasQuestion = (lc.match(/[?]/g)||[]).length >= 1;
+        const hasShortAnswer = text.split('\n').some(l => l.trim().length > 10 && l.trim().length < 200);
+        return hasQuestion && hasShortAnswer ? 18 : hasShortAnswer ? 12 : 5;
+      })()
+    },
+    {
+      label: 'Self-Containment',
+      max: 18,
+      score: Math.min(18, Math.round(words / 50 * 18)) // longer = more self-contained
+    },
+    {
+      label: 'Statistical Density',
+      max: 17,
+      score: (() => {
+        const numMatches = (lc.match(/\d+[\.,]?\d*\s*(%|triệu|tỷ|nghìn|k\b|usd|vnd|x\b)/gi)||[]).length;
+        return Math.min(17, numMatches * 4);
+      })()
+    },
+    {
+      label: 'Structural Clarity',
+      max: 17,
+      score: (() => {
+        const hasBullets = /[-•*]\s/.test(text);
+        const hasNumbers = /\d+\.\s/.test(text);
+        const hasHeadings = /##|\n[A-ZÁÀẢÃ]/.test(text);
+        return (hasBullets ? 6 : 0) + (hasNumbers ? 5 : 0) + (hasHeadings ? 6 : 0);
+      })()
+    },
+    {
+      label: 'Expertise Signals',
+      max: 13,
+      score: (() => {
+        const hasAuthor = /tác giả|author|by |nguồn:|source:/i.test(text);
+        const hasDate = /\d{4}|tháng \d|january|february|march|april|may|june|july|august|september|october|november|december/i.test(text);
+        const hasCite = /theo |according to|nghiên cứu|report|study/i.test(text);
+        return (hasAuthor ? 5 : 0) + (hasDate ? 4 : 0) + (hasCite ? 4 : 0);
+      })()
+    },
+    {
+      label: 'AI Query Alignment',
+      max: 15,
+      score: (() => {
+        const hasQ = (lc.match(/là gì|như thế nào|tại sao|how|what|why|when|where|which/g)||[]).length;
+        return Math.min(15, hasQ * 4);
+      })()
+    },
+  ];
+
+  const total = scores.reduce((s, m) => s + m.score, 0);
+  const maxTotal = scores.reduce((s, m) => s + m.max, 0);
+  const pct = Math.round((total / maxTotal) * 100);
+  const level = pct >= 70 ? '🟢 Excellent — AI sẽ trích dẫn bài này' : pct >= 50 ? '🟡 Good — Cần thêm data và answer block' : '🔴 Low — Cần cải thiện cấu trúc và dữ liệu';
+
+  document.getElementById('cit-result').innerHTML = `<strong style="color:var(--cyan);font-size:1.1rem">${pct}/100</strong> · ${level}`;
+
+  const barsEl = document.getElementById('cit-bars');
+  barsEl.style.display = 'flex';
+  barsEl.innerHTML = scores.map(m => {
+    const p = Math.round((m.score / m.max) * 100);
+    return `
+      <div class="cit-bar-row">
+        <span class="cit-bar-lbl">${m.label}</span>
+        <div class="cit-bar-track"><div class="cit-bar-fill" style="width:${p}%"></div></div>
+        <span class="cit-bar-val">${m.score}/${m.max}</span>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('cit-summary').innerHTML = pct >= 70
+    ? '✅ Bài viết này có cấu trúc tốt, AI engines (ChatGPT, Perplexity, Gemini) có khả năng cao sẽ trích dẫn.'
+    : pct >= 50
+    ? '💡 Cải thiện: Thêm số liệu cụ thể, format answer block rõ hơn, và đảm bảo tác giả + ngày được hiển thị.'
+    : '⚠️ Cần cải thiện nhiều: Thêm H2/H3, bullet points, số liệu và câu trả lời trực tiếp ở đầu bài.';
+
+  showToast(`Citability Score: ${pct}/100`);
+}
+
 /* ==================== INIT ==================== */
 renderRankTable();
 renderGbpTable();
@@ -747,4 +925,4 @@ if (brief) document.getElementById('brief-output').textContent = brief;
 const report = loadFromStorage('last_report');
 if (report) document.getElementById('report-output').textContent = report;
 
-console.log('%c📊 DM Workbench v3 — GEO+SEO Ready', 'color:#818cf8;font-weight:bold;font-size:1rem;');
+console.log('%c📊 DM Workbench v4 — GEO Score + Citability + Help Guides Ready', 'color:#818cf8;font-weight:bold;font-size:1rem;');

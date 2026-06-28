@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Digital Marketing Workbench — công cụ SEO, SEM, Content, Analytics, CRO và Reporting tích hợp cho Marketing Executive.">
+  <meta name="description" content="Digital Marketing Workbench — công cụ SEO, SEM, Content, Analytics, CRO và Reporting tích hợp. GEO Score, Content Citability, A/B Testing và Weekly Report.">
   <title>Digital Marketing Workbench · Portfolio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
@@ -46,7 +46,7 @@
           <p>Công cụ tích hợp cho SEO, SEM, Content, Analytics, CRO và Ops — xây dựng để demo năng lực Digital Marketing end-to-end.</p>
           <div class="stat-row">
             <div class="stat-item"><span class="stat-num">8</span><span class="stat-lbl">Modules</span></div>
-            <div class="stat-item"><span class="stat-num">30+</span><span class="stat-lbl">Tính năng</span></div>
+            <div class="stat-item"><span class="stat-num">35+</span><span class="stat-lbl">Tính năng</span></div>
             <div class="stat-item"><span class="stat-num">100%</span><span class="stat-lbl">Client-side</span></div>
           </div>
         </div>
@@ -56,7 +56,44 @@
         </div>
       </div>
 
-      <!-- Campaign Performance + KPI Snapshot -->
+      <!-- Help Guide: Dashboard -->
+      <div class="module-guide" id="guide-dashboard">
+        <div class="guide-header">
+          <div class="guide-title">📊 Hướng Dẫn: Dashboard & KPI Calculator</div>
+          <button class="guide-close" onclick="toggleGuide('dashboard')">✕</button>
+        </div>
+        <div class="guide-body">
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <h4>Nhập số liệu từ Google Ads / GA4</h4>
+            <p>Điền Impressions, Clicks, Leads, Spend (ngân sách) và Revenue (doanh thu) thực tế của tuần vừa qua.</p>
+            <span class="guide-tip">💡 Lấy từ Google Ads Manager hoặc GA4</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <h4>Bấm "Calculate KPI"</h4>
+            <p>Hệ thống tự động tính CTR, CVR, CPL, ROAS, CPC và phân loại màu: Xanh (Good) / Vàng (Warn) / Đỏ (Bad).</p>
+            <span class="guide-tip">🎯 ROAS ≥ 4x là tốt để scale budget</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <h4>Đọc Insight Box</h4>
+            <p>Hệ thống gợi ý hành động cụ thể dựa trên các chỉ số. Ví dụ: "ROAS tốt → scale budget 20-30%".</p>
+            <span class="guide-tip">📋 Copy insight paste vào báo cáo cho sếp</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <h4>Skill Coverage Matrix</h4>
+            <p>Bản đồ kỹ năng được demo trong tool — dùng để show với nhà tuyển dụng rằng bạn hiểu toàn bộ hệ sinh thái Digital Marketing.</p>
+            <span class="guide-tip">🌟 18 kỹ năng core cho Senior DM position</span>
+          </div>
+        </div>
+        <div class="guide-note">
+          <strong>Công thức KPI:</strong> CTR = Clicks/Impressions × 100 | CVR = Leads/Clicks × 100 | CPL = Spend/Leads | ROAS = Revenue/Spend | CPC = Spend/Clicks
+        </div>
+      </div>
+
+      <!-- Campaign Performance + KPI -->
       <div class="dashboard-grid">
         <div class="panel span-2">
           <div class="panel-title">
@@ -64,6 +101,7 @@
               <h2>📊 Campaign Performance</h2>
               <p>Nhập số liệu từ GA4, GSC, Ads Manager để tự động tính KPI.</p>
             </div>
+            <button class="guide-toggle-btn" onclick="toggleGuide('dashboard')">❓ Hướng dẫn</button>
           </div>
           <div class="metric-form">
             <label>Impressions<input type="number" id="kpi-impressions" value="20000"></label>
@@ -74,13 +112,9 @@
           </div>
           <button class="btn-primary" onclick="calculateKpis()" style="width:100%">⚡ Calculate KPI</button>
         </div>
-
         <div class="panel" style="grid-column: 1 / -1">
           <div class="panel-title">
-            <div>
-              <h2>🎯 KPI Snapshot</h2>
-              <p>CTR · CVR · CPL · ROAS · CPC và action recommendations.</p>
-            </div>
+            <div><h2>🎯 KPI Snapshot</h2><p>CTR · CVR · CPL · ROAS · CPC và action recommendations.</p></div>
           </div>
           <div class="metric-cards" id="kpi-results"></div>
           <div class="insight-box" id="kpi-insight"></div>
@@ -90,10 +124,7 @@
       <!-- Skill Matrix -->
       <div class="panel">
         <div class="panel-title">
-          <div>
-            <h2>🧠 Skill Coverage Matrix</h2>
-            <p>Các kỹ năng được demo trong workbench này, map từ JD Digital Marketing tiêu chuẩn.</p>
-          </div>
+          <div><h2>🧠 Skill Coverage Matrix</h2><p>Các kỹ năng được demo trong workbench — map từ JD Digital Marketing chuẩn.</p></div>
         </div>
         <div class="skill-grid" id="skill-grid"></div>
       </div>
@@ -102,21 +133,60 @@
     <!-- ==================== SEO ==================== -->
     <section id="seo" class="section">
       <div class="section-header">
-        <span class="eyebrow">✍️ SEO + Content Marketing</span>
-        <h2>SEO Brief & Audit Workspace</h2>
-        <p>Tạo content brief chuẩn AI/GEO, outline bài viết và kiểm tra checklist kỹ thuật SEO đầy đủ.</p>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+          <div>
+            <span class="eyebrow">✍️ SEO + Content Marketing + GEO/AI</span>
+            <h2>SEO Brief, GEO Score & Audit</h2>
+            <p>Tạo content brief chuẩn AI/GEO, tự đánh giá GEO Score website, và kiểm tra audit checklist kỹ thuật đầy đủ.</p>
+          </div>
+          <button class="guide-toggle-btn" onclick="toggleGuide('seo')">❓ Hướng dẫn</button>
+        </div>
       </div>
 
+      <!-- Help Guide: SEO -->
+      <div class="module-guide" id="guide-seo">
+        <div class="guide-header">
+          <div class="guide-title">✍️ Hướng Dẫn: SEO Module</div>
+          <button class="guide-close" onclick="toggleGuide('seo')">✕</button>
+        </div>
+        <div class="guide-body">
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <h4>SEO Content Brief</h4>
+            <p>Nhập primary keyword, target audience, business goal và secondary keywords. Bấm "Generate Brief" để nhận outline + AI writing prompt chuẩn GEO.</p>
+            <span class="guide-tip">📋 Copy prompt → paste vào ChatGPT/Claude để viết bài</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <h4>GEO Score Calculator (Mới!)</h4>
+            <p>Tự đánh giá website theo 4 chiều: Technical (20%), Citability (35%), Schema (20%), Brand (25%). Nhận GEO Score 0-100 và danh sách ưu tiên fix.</p>
+            <span class="guide-tip">🤖 GEO = tối ưu cho ChatGPT, Gemini, Perplexity</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <h4>SEO Audit Checklist</h4>
+            <p>17 điểm kiểm tra kỹ thuật SEO + 8 điểm GEO/AI mới. Tick từng ô khi đã hoàn thành. Bài viết pass > 80% là sẵn sàng publish.</p>
+            <span class="guide-tip">✅ GEO/AI checklist = xuất hiện trong AI Overviews</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <h4>Content Citability Scorer</h4>
+            <p>Paste nội dung bài viết → hệ thống chấm điểm theo 6 metric của GEO framework: Answer Block, Self-Containment, Data, Structure, E-E-A-T, Query Alignment.</p>
+            <span class="guide-tip">🎯 Score ≥ 70/100 = AI sẽ cite bài của bạn</span>
+          </div>
+        </div>
+        <div class="guide-note">
+          <strong>GEO vs SEO:</strong> SEO truyền thống tối ưu cho Google ranking · GEO (Generative Engine Optimization) tối ưu để AI như ChatGPT, Perplexity, Gemini trích dẫn website của bạn trong câu trả lời.
+        </div>
+      </div>
+
+      <!-- SEO Content Brief -->
       <div class="two-col">
         <div class="panel">
           <div class="panel-title"><h3>📝 SEO Content Brief</h3></div>
           <div class="form-stack">
-            <label>Primary keyword
-              <input id="brief-keyword" placeholder="VD: dịch vụ SEO local">
-            </label>
-            <label>Target audience
-              <input id="brief-audience" placeholder="VD: owner SME, marketing manager">
-            </label>
+            <label>Primary keyword<input id="brief-keyword" placeholder="VD: dịch vụ SEO local"></label>
+            <label>Target audience<input id="brief-audience" placeholder="VD: owner SME, marketing manager"></label>
             <label>Business goal
               <select id="brief-goal">
                 <option value="lead">Generate leads</option>
@@ -125,9 +195,7 @@
                 <option value="brand">Build digital brand</option>
               </select>
             </label>
-            <label>Secondary keywords
-              <textarea id="brief-secondary" rows="4" placeholder="Mỗi keyword một dòng"></textarea>
-            </label>
+            <label>Secondary keywords<textarea id="brief-secondary" rows="4" placeholder="Mỗi keyword một dòng"></textarea></label>
             <button class="btn-primary full" onclick="generateContentBrief()">✨ Generate Brief</button>
           </div>
         </div>
@@ -140,8 +208,109 @@
         </div>
       </div>
 
+      <!-- GEO Score Calculator -->
       <div class="panel">
-        <div class="panel-title"><h3>✅ SEO Audit Checklist</h3></div>
+        <div class="panel-title">
+          <div>
+            <h3>🤖 GEO Score Calculator</h3>
+            <p style="font-size:0.75rem;color:var(--t3);margin-top:0.15rem">Tự đánh giá website — Generative Engine Optimization Score (0-100)</p>
+          </div>
+          <button class="btn-primary" onclick="calculateGeoScore()" style="flex-shrink:0">⚡ Calculate GEO Score</button>
+        </div>
+        <div class="geo-grid">
+          <!-- Technical Accessibility 20% -->
+          <div class="geo-dimension">
+            <div class="geo-dim-header">
+              <div class="geo-dim-title">🔧 Technical Accessibility</div>
+              <span class="geo-dim-weight">20%</span>
+            </div>
+            <div class="geo-checks">
+              <label class="geo-check-item"><input type="checkbox" id="geo-t1"><span>HTTPS và tốc độ tải &lt; 3 giây</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-t2"><span>Sitemap.xml đã submit lên GSC</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-t3"><span>robots.txt KHÔNG block GPTBot, ClaudeBot, PerplexityBot</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-t4"><span>Có file llms.txt (tương đương robots.txt cho AI)</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-t5"><span>Content render được (không phụ thuộc JS 100%)</span></label>
+            </div>
+          </div>
+          <!-- Content Citability 35% -->
+          <div class="geo-dimension">
+            <div class="geo-dim-header">
+              <div class="geo-dim-title">✍️ Content Citability</div>
+              <span class="geo-dim-weight">35% ← Quan trọng nhất</span>
+            </div>
+            <div class="geo-checks">
+              <label class="geo-check-item"><input type="checkbox" id="geo-c1"><span>Có "answer block" — câu trả lời trực tiếp ≤ 50 words</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-c2"><span>Có số liệu, %, thống kê cụ thể (không chung chung)</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-c3"><span>H2/H3 rõ ràng, content dễ scan</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-c4"><span>Có FAQ section ≥ 3 câu hỏi</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-c5"><span>Tác giả rõ ràng, ngày publish/update hiển thị</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-c6"><span>Nội dung trả lời được câu hỏi của người dùng</span></label>
+            </div>
+          </div>
+          <!-- Structured Data 20% -->
+          <div class="geo-dimension">
+            <div class="geo-dim-header">
+              <div class="geo-dim-title">🏗️ Structured Data (Schema)</div>
+              <span class="geo-dim-weight">20%</span>
+            </div>
+            <div class="geo-checks">
+              <label class="geo-check-item"><input type="checkbox" id="geo-s1"><span>Organization schema (tên, địa chỉ, SĐT)</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-s2"><span>FAQ schema JSON-LD trên trang chính</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-s3"><span>Article/BlogPosting schema cho blog</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-s4"><span>BreadcrumbList schema</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-s5"><span>Local Business / Product schema (nếu phù hợp)</span></label>
+            </div>
+          </div>
+          <!-- Entity & Brand 25% -->
+          <div class="geo-dimension">
+            <div class="geo-dim-header">
+              <div class="geo-dim-title">🏆 Entity & Brand Signals</div>
+              <span class="geo-dim-weight">25%</span>
+            </div>
+            <div class="geo-checks">
+              <label class="geo-check-item"><input type="checkbox" id="geo-b1"><span>Google Business Profile đầy đủ & active</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-b2"><span>NAP nhất quán: Tên, Địa chỉ, SĐT trên tất cả nền tảng</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-b3"><span>Có mention trên Trustpilot, G2, Facebook... (review sites)</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-b4"><span>Có Wikipedia / Wikidata entry</span></label>
+              <label class="geo-check-item"><input type="checkbox" id="geo-b5"><span>Thương hiệu được mention trên báo/blog uy tín</span></label>
+            </div>
+          </div>
+        </div>
+        <!-- GEO Result -->
+        <div class="geo-result" id="geo-result">
+          <div class="geo-score-display">
+            <div>
+              <div class="geo-big-num" id="geo-big-num">—</div>
+              <div class="geo-big-grade" id="geo-big-grade">/100 · GEO Score</div>
+            </div>
+            <div class="geo-breakdown" id="geo-breakdown"></div>
+          </div>
+          <div class="geo-issues" id="geo-issues"></div>
+        </div>
+      </div>
+
+      <!-- Content Citability Scorer -->
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-title"><h3>📊 Content Citability Scorer</h3></div>
+          <div class="form-stack">
+            <label>Paste nội dung bài viết
+              <textarea id="cit-text" rows="8" placeholder="Paste nội dung bài viết vào đây để chấm điểm khả năng được AI trích dẫn..."></textarea>
+            </label>
+            <button class="btn-primary full" onclick="scoreCitability()">🎯 Score Citability</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-title"><h3>📈 Citability Score</h3></div>
+          <div id="cit-result" style="color:var(--t3);font-size:0.82rem;margin-bottom:0.5rem">Paste bài viết và bấm Score Citability.</div>
+          <div class="cit-bars" id="cit-bars" style="display:none"></div>
+          <div id="cit-summary" style="margin-top:0.8rem;font-size:0.78rem;color:var(--t2);line-height:1.6"></div>
+        </div>
+      </div>
+
+      <!-- SEO Audit Checklist -->
+      <div class="panel">
+        <div class="panel-title"><h3>✅ SEO Audit Checklist (incl. GEO/AI Platform)</h3></div>
         <div class="check-grid" id="seo-checklist"></div>
       </div>
     </section>
@@ -149,9 +318,51 @@
     <!-- ==================== KEYWORDS ==================== -->
     <section id="keywords" class="section">
       <div class="section-header">
-        <span class="eyebrow">🔑 Keyword Research</span>
-        <h2>Keyword Intent Mapper</h2>
-        <p>Phân loại keyword theo intent, funnel stage và recommended asset để phân bổ ngân sách content/ads đúng mục tiêu.</p>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+          <div>
+            <span class="eyebrow">🔑 Keyword Research</span>
+            <h2>Keyword Intent Mapper</h2>
+            <p>Phân loại keyword theo intent, funnel stage và recommended asset.</p>
+          </div>
+          <button class="guide-toggle-btn" onclick="toggleGuide('keywords')">❓ Hướng dẫn</button>
+        </div>
+      </div>
+
+      <!-- Help Guide: Keywords -->
+      <div class="module-guide" id="guide-keywords">
+        <div class="guide-header">
+          <div class="guide-title">🔑 Hướng Dẫn: Keyword Intent Mapper</div>
+          <button class="guide-close" onclick="toggleGuide('keywords')">✕</button>
+        </div>
+        <div class="guide-body">
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <h4>Lấy keyword từ đâu?</h4>
+            <p>Export từ Google Search Console (Performance → Queries), Ahrefs, Semrush, hoặc Google Keyword Planner.</p>
+            <span class="guide-tip">📥 Lấy từ GSC → Performance → Queries</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <h4>Paste và Map Keywords</h4>
+            <p>Mỗi keyword một dòng. Bấm "Map Keywords" — hệ thống tự phân loại intent và gợi ý loại content nên tạo.</p>
+            <span class="guide-tip">🗂 Hỗ trợ tiếng Việt và tiếng Anh</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <h4>Đọc kết quả Intent Table</h4>
+            <p><strong>Informational (TOFU)</strong>: Viết blog/guide · <strong>Commercial (MOFU)</strong>: Review/comparison · <strong>Transactional (BOFU)</strong>: Landing page · <strong>Local</strong>: GBP/Local page</p>
+            <span class="guide-tip">📊 Phân bổ budget: 40% TOFU, 30% MOFU, 30% BOFU</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <h4>Export sang Google Sheets</h4>
+            <p>Bấm "Copy Table" → Paste thẳng vào Google Sheets. Tab-separated format tự động align vào cột.</p>
+            <span class="guide-tip">📋 Dùng để báo cáo keyword plan cho team</span>
+          </div>
+        </div>
+        <div class="guide-note">
+          <strong>Content Citation Rate theo AI:</strong> Comparison articles ~33% · Definitive guides ~15% · Original research ~12% · Best-of/listicles ~10% · How-to guides ~8%
+        </div>
       </div>
 
       <div class="two-col">
@@ -170,14 +381,7 @@
           </div>
           <div class="table-wrap">
             <table id="keyword-table">
-              <thead>
-                <tr>
-                  <th>Keyword</th>
-                  <th>Intent</th>
-                  <th>Funnel</th>
-                  <th>Recommended Asset</th>
-                </tr>
-              </thead>
+              <thead><tr><th>Keyword</th><th>Intent</th><th>Funnel</th><th>Recommended Asset</th></tr></thead>
               <tbody></tbody>
             </table>
           </div>
@@ -188,126 +392,173 @@
     <!-- ==================== CHANNELS ==================== -->
     <section id="channels" class="section">
       <div class="section-header">
-        <span class="eyebrow">📣 SEM · Social · Email</span>
-        <h2>Channel Planning Tools</h2>
-        <p>Lập kế hoạch đa kênh: SEM campaign, social content calendar và email nurture sequence builder.</p>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+          <div>
+            <span class="eyebrow">📣 SEM · Social · Email</span>
+            <h2>Channel Planning Tools</h2>
+            <p>Lập kế hoạch đa kênh: SEM campaign, social content calendar và email nurture sequence.</p>
+          </div>
+          <button class="guide-toggle-btn" onclick="toggleGuide('channels')">❓ Hướng dẫn</button>
+        </div>
+      </div>
+
+      <!-- Help Guide: Channels -->
+      <div class="module-guide" id="guide-channels">
+        <div class="guide-header">
+          <div class="guide-title">📣 Hướng Dẫn: Channel Planning</div>
+          <button class="guide-close" onclick="toggleGuide('channels')">✕</button>
+        </div>
+        <div class="guide-body">
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <h4>SEM Campaign Planner</h4>
+            <p>Chọn platform, objective, nhập offer và budget. Nhận cấu trúc campaign, targeting, ad copy formula và KPI targets.</p>
+            <span class="guide-tip">🎯 Hỗ trợ: Google Ads, Meta, LinkedIn, TikTok</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <h4>Social Content Calendar</h4>
+            <p>Nhận kế hoạch 4 tuần: Educational (40%) → Brand Story (20%) → Case Study (25%) → Engagement (15%) + content hooks cho từng platform.</p>
+            <span class="guide-tip">📅 Tần suất tối ưu: LinkedIn 3-5x/tuần, TikTok 1-3x/ngày</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <h4>Email Sequence Builder</h4>
+            <p>Chọn loại sequence (Welcome/Nurture/Re-engagement/Post-purchase). Nhận timeline email Day 0→14, subject line mẫu và KPI targets.</p>
+            <span class="guide-tip">📧 Open Rate target: ≥25% (cold), ≥40% (warm)</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <h4>Copy và sử dụng Output</h4>
+            <p>Bấm "Copy" → paste vào file Google Docs hoặc Notion. Output đã format sẵn, chỉ cần customize theo thương hiệu của bạn.</p>
+            <span class="guide-tip">📋 Share trực tiếp cho Agency hoặc Content Writer</span>
+          </div>
+        </div>
+        <div class="guide-note">
+          <strong>Best practice:</strong> Luôn tạo UTM link (Tab Analytics) trước khi gửi link cho Agency chạy campaign để tracking chính xác trên GA4.
+        </div>
       </div>
 
       <div class="three-col">
         <div class="panel">
           <div class="panel-title"><h3>🔍 SEM Campaign Planner</h3></div>
           <div class="form-stack">
-            <label>Platform
-              <select id="sem-platform"><option>Google Ads</option><option>Meta Ads</option><option>LinkedIn Ads</option><option>TikTok Ads</option></select>
-            </label>
-            <label>Objective
-              <select id="sem-objective"><option>Leads</option><option>Traffic</option><option>Awareness</option><option>Sales</option></select>
-            </label>
-            <label>Offer
-              <input id="sem-offer" placeholder="VD: free consultation, promo">
-            </label>
-            <label>Budget / month (VND)
-              <input id="sem-budget" type="number" placeholder="VD: 5000000">
-            </label>
+            <label>Platform<select id="sem-platform"><option>Google Ads</option><option>Meta Ads</option><option>LinkedIn Ads</option><option>TikTok Ads</option></select></label>
+            <label>Objective<select id="sem-objective"><option>Leads</option><option>Traffic</option><option>Awareness</option><option>Sales</option></select></label>
+            <label>Offer<input id="sem-offer" placeholder="VD: free consultation, promo"></label>
+            <label>Budget / month (VND)<input id="sem-budget" type="number" placeholder="VD: 5000000"></label>
             <button class="btn-primary full" onclick="generateSemPlan()">🚀 Create SEM Plan</button>
           </div>
         </div>
-
         <div class="panel">
           <div class="panel-title"><h3>📅 Social Calendar</h3></div>
           <div class="form-stack">
-            <label>Platform
-              <select id="social-platform"><option>LinkedIn</option><option>Facebook</option><option>Instagram</option><option>TikTok</option><option>Twitter/X</option></select>
-            </label>
-            <label>Content pillar
-              <input id="social-pillar" placeholder="VD: educational, brand, case study">
-            </label>
-            <label>Goal
-              <select id="social-goal"><option>Awareness</option><option>Engagement</option><option>Traffic</option><option>Leads</option></select>
-            </label>
+            <label>Platform<select id="social-platform"><option>LinkedIn</option><option>Facebook</option><option>Instagram</option><option>TikTok</option><option>Twitter/X</option></select></label>
+            <label>Content pillar<input id="social-pillar" placeholder="VD: educational, brand, case study"></label>
+            <label>Goal<select id="social-goal"><option>Awareness</option><option>Engagement</option><option>Traffic</option><option>Leads</option></select></label>
             <button class="btn-primary full" onclick="generateSocialPlan()" style="margin-top:auto">📆 Create Calendar</button>
           </div>
         </div>
-
         <div class="panel">
           <div class="panel-title"><h3>📧 Email Sequence</h3></div>
           <div class="form-stack">
-            <label>Sequence type
-              <select id="email-type"><option>Welcome</option><option>Lead nurture</option><option>Re-engagement</option><option>Post-purchase</option></select>
-            </label>
-            <label>Trigger
-              <input id="email-trigger" placeholder="VD: form submit, download guide">
-            </label>
-            <label>Conversion goal
-              <input id="email-goal" placeholder="VD: book consultation, request quote">
-            </label>
+            <label>Sequence type<select id="email-type"><option>Welcome</option><option>Lead nurture</option><option>Re-engagement</option><option>Post-purchase</option></select></label>
+            <label>Trigger<input id="email-trigger" placeholder="VD: form submit, download guide"></label>
+            <label>Conversion goal<input id="email-goal" placeholder="VD: book consultation, request quote"></label>
             <button class="btn-primary full" onclick="generateEmailPlan()" style="margin-top:auto">✉️ Create Sequence</button>
           </div>
         </div>
       </div>
-
       <div class="panel">
         <div class="panel-title">
           <h3>📋 Channel Output</h3>
           <button class="btn-ghost" onclick="copyToClipboard('channel-output')">⎘ Copy</button>
         </div>
-        <pre class="output short" id="channel-output">Kết quả channel planner sẽ hiển thị ở đây sau khi bấm nút tương ứng.</pre>
+        <pre class="output short" id="channel-output">Kết quả sẽ hiển thị ở đây sau khi bấm nút tương ứng.</pre>
       </div>
     </section>
 
     <!-- ==================== ANALYTICS ==================== -->
     <section id="analytics" class="section">
       <div class="section-header">
-        <span class="eyebrow">📈 GA4 · GSC · Ads Manager</span>
-        <h2>Analytics & Tracking Builder</h2>
-        <p>Build UTM link chuẩn naming convention và tracking plan cho dev gắn GTM — nguyên tắc: track for decisions, no PII.</p>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+          <div>
+            <span class="eyebrow">📈 GA4 · GSC · Ads Manager</span>
+            <h2>Analytics & Tracking Builder</h2>
+            <p>Build UTM link chuẩn naming convention và tracking plan cho dev gắn GTM.</p>
+          </div>
+          <button class="guide-toggle-btn" onclick="toggleGuide('analytics')">❓ Hướng dẫn</button>
+        </div>
+      </div>
+
+      <!-- Help Guide: Analytics -->
+      <div class="module-guide" id="guide-analytics">
+        <div class="guide-header">
+          <div class="guide-title">📈 Hướng Dẫn: Analytics & UTM</div>
+          <button class="guide-close" onclick="toggleGuide('analytics')">✕</button>
+        </div>
+        <div class="guide-body">
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <h4>UTM Builder — Tại sao cần?</h4>
+            <p>Không có UTM, GA4 không biết traffic đến từ kênh nào. UTM giúp phân biệt: traffic Facebook Ad khác Newsletter khác Google Ads.</p>
+            <span class="guide-tip">⚠️ Luôn build UTM trước khi gửi link cho agency</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <h4>Naming Convention UTM</h4>
+            <p><strong>Source</strong>: nơi đến (google, facebook) · <strong>Medium</strong>: loại kênh (cpc, email, social) · <strong>Campaign</strong>: tên chiến dịch (bha_launch_jun2026) · <strong>Content</strong>: phân biệt variant.</p>
+            <span class="guide-tip">📐 Luôn dùng lowercase + underscore (_)</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <h4>Tracking Plan cho Developer</h4>
+            <p>Add các Event cần track: event_name, trigger (khi nào fire), properties (data gửi kèm), decision (quyết định gì từ data này). Gửi cho Dev để gắn GTM.</p>
+            <span class="guide-tip">🔧 Nguyên tắc: "Track for decisions, not data hoarding"</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <h4>Kiểm tra trong GA4</h4>
+            <p>Sau khi campaign chạy, vào GA4 → Reports → Acquisition → Traffic acquisition → Lọc theo utm_campaign để xem hiệu quả từng kênh.</p>
+            <span class="guide-tip">📊 GA4 Real-time để verify event đang fire đúng</span>
+          </div>
+        </div>
+        <div class="guide-note">
+          <strong>Lưu ý quan trọng:</strong> UTM <strong>case-sensitive</strong> — "Facebook" khác "facebook" trong GA4. Luôn lowercase và nhất quán toàn team.
+        </div>
       </div>
 
       <div class="two-col">
         <div class="panel">
           <div class="panel-title"><h3>🔗 UTM Builder</h3></div>
           <div class="form-stack">
-            <label>Final URL
-              <input id="utm-url" placeholder="https://example.com/landing-page">
-            </label>
-            <label>Source
-              <input id="utm-source" placeholder="google · facebook · newsletter">
-            </label>
-            <label>Medium
-              <input id="utm-medium" placeholder="cpc · social · email">
-            </label>
-            <label>Campaign
-              <input id="utm-campaign" placeholder="summer_promo_2026">
-            </label>
-            <label>Content (optional)
-              <input id="utm-content" placeholder="hero_cta · carousel_01">
-            </label>
+            <label>Final URL<input id="utm-url" placeholder="https://example.com/landing-page"></label>
+            <label>Source<input id="utm-source" placeholder="google · facebook · newsletter"></label>
+            <label>Medium<input id="utm-medium" placeholder="cpc · social · email"></label>
+            <label>Campaign<input id="utm-campaign" placeholder="summer_promo_2026"></label>
+            <label>Content (optional)<input id="utm-content" placeholder="hero_cta · carousel_01"></label>
             <button class="btn-primary full" onclick="buildUtm()">⚡ Build UTM</button>
           </div>
         </div>
-
         <div class="panel">
           <div class="panel-title">
             <h3>📋 Tracking Plan</h3>
             <button class="btn-ghost" onclick="addTrackingEvent()">+ Add Event</button>
           </div>
           <div class="inline-form tracking-form">
-            <input id="track-event"    placeholder="event_name">
-            <input id="track-trigger"  placeholder="Trigger">
-            <input id="track-props"    placeholder="Properties">
+            <input id="track-event" placeholder="event_name">
+            <input id="track-trigger" placeholder="Trigger">
+            <input id="track-props" placeholder="Properties">
             <input id="track-decision" placeholder="Decision supported">
           </div>
           <div class="table-wrap">
             <table id="tracking-table">
-              <thead>
-                <tr><th>Event</th><th>Trigger</th><th>Properties</th><th>Decision</th><th></th></tr>
-              </thead>
+              <thead><tr><th>Event</th><th>Trigger</th><th>Properties</th><th>Decision</th><th></th></tr></thead>
               <tbody></tbody>
             </table>
           </div>
         </div>
       </div>
-
       <div class="panel">
         <div class="panel-title">
           <h3>🔗 Generated UTM</h3>
@@ -320,28 +571,68 @@
     <!-- ==================== CRO TESTS ==================== -->
     <section id="experiments" class="section">
       <div class="section-header">
-        <span class="eyebrow">🧪 CRO · A/B Testing</span>
-        <h2>Experiment Backlog</h2>
-        <p>Thiết kế giả thuyết, chấm điểm ICE (Impact · Confidence · Ease) và ưu tiên thử nghiệm nào làm trước.</p>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+          <div>
+            <span class="eyebrow">🧪 CRO · A/B Testing</span>
+            <h2>Experiment Backlog</h2>
+            <p>Thiết kế giả thuyết, chấm điểm ICE và ưu tiên thử nghiệm nào làm trước.</p>
+          </div>
+          <button class="guide-toggle-btn" onclick="toggleGuide('experiments')">❓ Hướng dẫn</button>
+        </div>
+      </div>
+
+      <!-- Help Guide: CRO -->
+      <div class="module-guide" id="guide-experiments">
+        <div class="guide-header">
+          <div class="guide-title">🧪 Hướng Dẫn: CRO Experiment Backlog</div>
+          <button class="guide-close" onclick="toggleGuide('experiments')">✕</button>
+        </div>
+        <div class="guide-body">
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <h4>Viết hypothesis đúng cách</h4>
+            <p><strong>Because</strong>: Data/observation thấy gì? (VD: Heatmap cho thấy 70% user bỏ qua nút CTA) · <strong>We believe</strong>: Thay đổi gì sẽ cải thiện? (VD: Đổi màu CTA sang cam)</p>
+            <span class="guide-tip">🔬 Hypothesis tốt = có thể sai được (falsifiable)</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <h4>ICE Scoring Framework</h4>
+            <p><strong>Impact</strong> (1-10): Nếu win, tác động lớn thế nào? · <strong>Confidence</strong> (1-10): Chắc chắn bao nhiêu % sẽ win? · <strong>Ease</strong> (1-10): Dễ implement thế nào?</p>
+            <span class="guide-tip">⚡ ICE Score = (I+C+E)/3 → Làm cao điểm trước</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <h4>Primary Metric</h4>
+            <p>Mỗi test chỉ có 1 metric đo lường chính. VD: "CTR nút CTA" hoặc "CVR form đăng ký". Không đo nhiều metric cùng lúc — sẽ mất ý nghĩa thống kê.</p>
+            <span class="guide-tip">📊 Cần ≥ 100 conversions mỗi variant để có ý nghĩa</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <h4>Quản lý Status</h4>
+            <p>Chuyển Status từ Backlog → Running → Won/Lost. Dữ liệu này tự động được pull vào Weekly Report để báo cáo tiến độ CRO.</p>
+            <span class="guide-tip">📈 Track cả test thất bại — learning rất có giá trị</span>
+          </div>
+        </div>
+        <div class="guide-note">
+          <strong>7 Chiều CRO quan trọng nhất:</strong> (1) Value Proposition · (2) Headline · (3) CTA · (4) Visual Hierarchy · (5) Trust Signals · (6) Objection Handling · (7) Friction Points
+        </div>
       </div>
 
       <div class="panel">
         <div class="panel-title"><h3>➕ Add Experiment</h3></div>
         <div class="inline-form experiment-form">
-          <input id="exp-name"        placeholder="Experiment name">
+          <input id="exp-name" placeholder="Experiment name">
           <input id="exp-observation" placeholder="Because [data/observation]">
-          <input id="exp-change"      placeholder="We believe [change]">
-          <input id="exp-metric"      placeholder="Primary metric">
-          <input id="exp-impact"      type="number" min="1" max="10" placeholder="Impact (1-10)">
-          <input id="exp-confidence"  type="number" min="1" max="10" placeholder="Confidence (1-10)">
-          <input id="exp-ease"        type="number" min="1" max="10" placeholder="Ease (1-10)">
+          <input id="exp-change" placeholder="We believe [change]">
+          <input id="exp-metric" placeholder="Primary metric">
+          <input id="exp-impact" type="number" min="1" max="10" placeholder="Impact (1-10)">
+          <input id="exp-confidence" type="number" min="1" max="10" placeholder="Confidence (1-10)">
+          <input id="exp-ease" type="number" min="1" max="10" placeholder="Ease (1-10)">
           <button class="btn-primary" onclick="addExperiment()">+ Add Test</button>
         </div>
         <div class="table-wrap">
           <table id="experiment-table">
-            <thead>
-              <tr><th>Experiment</th><th>Hypothesis</th><th>Metric</th><th>ICE Score</th><th>Status</th><th></th></tr>
-            </thead>
+            <thead><tr><th>Experiment</th><th>Hypothesis</th><th>Metric</th><th>ICE Score</th><th>Status</th><th></th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
@@ -351,27 +642,67 @@
     <!-- ==================== OPS ==================== -->
     <section id="ops" class="section">
       <div class="section-header">
-        <span class="eyebrow">⚙️ SEO Ops · Local SEO · Vertical Cards</span>
-        <h2>Operations Workspace</h2>
-        <p>Theo dõi thứ hạng keyword, kiểm tra tiến độ GBP các chi nhánh và quản lý task card liên phòng ban.</p>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+          <div>
+            <span class="eyebrow">⚙️ SEO Ops · Local SEO · Vertical Cards</span>
+            <h2>Operations Workspace</h2>
+            <p>Theo dõi thứ hạng keyword, GBP chi nhánh và task cards liên phòng ban.</p>
+          </div>
+          <button class="guide-toggle-btn" onclick="toggleGuide('ops')">❓ Hướng dẫn</button>
+        </div>
+      </div>
+
+      <!-- Help Guide: Ops -->
+      <div class="module-guide" id="guide-ops">
+        <div class="guide-header">
+          <div class="guide-title">⚙️ Hướng Dẫn: Operations Workspace</div>
+          <button class="guide-close" onclick="toggleGuide('ops')">✕</button>
+        </div>
+        <div class="guide-body">
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <h4>Keyword Rank Tracker</h4>
+            <p>Add keyword + URL trang mục tiêu + thứ hạng hiện tại (Current) + tuần trước (Previous). Hệ thống tự tính thay đổi và hiển thị badge Top 3.</p>
+            <span class="guide-tip">📉 Lấy ranking từ GSC hoặc Ahrefs mỗi thứ 2</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <h4>GBP Branch Checklist</h4>
+            <p>Quản lý tiến độ cập nhật Google Business Profile cho từng chi nhánh. Mỗi tuần check: NAP, Photos, Post, Review response, Q&A.</p>
+            <span class="guide-tip">📍 GBP hoàn chỉnh tăng 40% cơ hội xuất hiện Local Pack</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <h4>Vertical Card Monitor</h4>
+            <p>Track các task/project liên phòng ban. Hệ thống tự cảnh báo "Overdue!" (quá hạn đỏ) và "Due Soon" (sắp đến hạn vàng).</p>
+            <span class="guide-tip">🔴 Overdue card = escalate ngay với team owner</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <h4>Dữ liệu tự pull vào Report</h4>
+            <p>Tất cả data ở tab Ops (Rank, GBP, Cards) sẽ được tự động tổng hợp khi bấm "Generate Report" ở tab Reports — không cần nhập lại thủ công.</p>
+            <span class="guide-tip">⚡ Data sync tự động → tiết kiệm 2 tiếng/tuần</span>
+          </div>
+        </div>
+        <div class="guide-note">
+          <strong>Local SEO cần làm mỗi tuần:</strong> ① Update 1 GBP Post mới ② Reply tất cả reviews ③ Check ranking keyword địa phương ④ Ensure NAP nhất quán
+        </div>
       </div>
 
       <!-- Rank Tracker -->
       <div class="panel">
         <div class="panel-title"><h3>📉 Keyword Rank Tracker</h3></div>
         <div class="inline-form rank-form">
-          <input id="rank-keyword"  placeholder="Keyword">
-          <input id="rank-url"      placeholder="Target URL">
-          <input id="rank-current"  type="number" placeholder="Current rank">
+          <input id="rank-keyword" placeholder="Keyword">
+          <input id="rank-url" placeholder="Target URL">
+          <input id="rank-current" type="number" placeholder="Current rank">
           <input id="rank-previous" type="number" placeholder="Previous rank">
-          <input id="rank-note"     placeholder="Note / action">
+          <input id="rank-note" placeholder="Note / action">
           <button class="btn-primary" onclick="addRankRow()">+ Add</button>
         </div>
         <div class="table-wrap">
           <table id="rank-table">
-            <thead>
-              <tr><th>Keyword</th><th>URL</th><th>Current</th><th>Previous</th><th>Change</th><th>Status</th><th>Note</th><th></th></tr>
-            </thead>
+            <thead><tr><th>Keyword</th><th>URL</th><th>Current</th><th>Previous</th><th>Change</th><th>Status</th><th>Note</th><th></th></tr></thead>
             <tbody></tbody>
           </table>
         </div>
@@ -383,55 +714,31 @@
           <div class="panel-title"><h3>📍 GBP Branch Checklist</h3></div>
           <div class="inline-form compact-form">
             <input id="gbp-branch" placeholder="Branch name">
-            <select id="gbp-task">
-              <option>NAP consistency</option>
-              <option>Primary category</option>
-              <option>Photos updated</option>
-              <option>Weekly GBP post</option>
-              <option>Review response</option>
-              <option>Q&A updated</option>
-            </select>
-            <select id="gbp-status">
-              <option>Pending</option>
-              <option>In progress</option>
-              <option>Done</option>
-              <option>Blocked</option>
-            </select>
+            <select id="gbp-task"><option>NAP consistency</option><option>Primary category</option><option>Photos updated</option><option>Weekly GBP post</option><option>Review response</option><option>Q&A updated</option></select>
+            <select id="gbp-status"><option>Pending</option><option>In progress</option><option>Done</option><option>Blocked</option></select>
             <input id="gbp-owner" placeholder="Owner">
             <button class="btn-primary" onclick="addGbpTask()">+ Add</button>
           </div>
           <div class="table-wrap">
             <table id="gbp-table">
-              <thead>
-                <tr><th>Branch</th><th>Task</th><th>Status</th><th>Owner</th><th>Updated</th><th></th></tr>
-              </thead>
+              <thead><tr><th>Branch</th><th>Task</th><th>Status</th><th>Owner</th><th>Updated</th><th></th></tr></thead>
               <tbody></tbody>
             </table>
           </div>
         </div>
-
         <div class="panel">
           <div class="panel-title"><h3>🗂 Vertical Card Monitor</h3></div>
           <div class="inline-form compact-form">
             <input id="card-title" placeholder="Card title">
-            <select id="card-vertical">
-              <option>SEO</option><option>SEM</option><option>Social</option>
-              <option>Email</option><option>CRM</option><option>Performance</option>
-              <option>Xsell / Sales / Growth</option>
-            </select>
-            <select id="card-process">
-              <option>Update</option><option>RAF</option>
-              <option>+1 Review</option><option>Forecast</option><option>Post-mortem</option>
-            </select>
+            <select id="card-vertical"><option>SEO</option><option>SEM</option><option>Social</option><option>Email</option><option>CRM</option><option>Performance</option><option>Xsell / Sales / Growth</option></select>
+            <select id="card-process"><option>Update</option><option>RAF</option><option>+1 Review</option><option>Forecast</option><option>Post-mortem</option></select>
             <input id="card-owner" placeholder="Owner">
-            <input id="card-due"   type="date">
+            <input id="card-due" type="date">
             <button class="btn-primary" onclick="addOpsCard()">+ Add</button>
           </div>
           <div class="table-wrap">
             <table id="ops-table">
-              <thead>
-                <tr><th>Card</th><th>Vertical</th><th>Process</th><th>Owner</th><th>Due</th><th>Flag</th><th></th></tr>
-              </thead>
+              <thead><tr><th>Card</th><th>Vertical</th><th>Process</th><th>Owner</th><th>Due</th><th>Flag</th><th></th></tr></thead>
               <tbody></tbody>
             </table>
           </div>
@@ -442,20 +749,58 @@
     <!-- ==================== REPORTS ==================== -->
     <section id="report" class="section">
       <div class="section-header">
-        <span class="eyebrow">📄 Documentation · Reporting</span>
-        <h2>Weekly Insight Report Generator</h2>
-        <p>Tạo báo cáo ngắn cho manager hoặc CMO: highlights, blockers, inconsistencies, insights và next actions — tự động pull dữ liệu workspace.</p>
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:1rem">
+          <div>
+            <span class="eyebrow">📄 Documentation · Reporting</span>
+            <h2>Weekly Insight Report Generator</h2>
+            <p>Tạo báo cáo ngắn cho manager — tự động pull dữ liệu từ toàn bộ workspace.</p>
+          </div>
+          <button class="guide-toggle-btn" onclick="toggleGuide('report')">❓ Hướng dẫn</button>
+        </div>
+      </div>
+
+      <!-- Help Guide: Reports -->
+      <div class="module-guide" id="guide-report">
+        <div class="guide-header">
+          <div class="guide-title">📄 Hướng Dẫn: Weekly Report Generator</div>
+          <button class="guide-close" onclick="toggleGuide('report')">✕</button>
+        </div>
+        <div class="guide-body">
+          <div class="guide-step">
+            <div class="guide-step-num">1</div>
+            <h4>Điền 3 mục chính</h4>
+            <p><strong>Highlights</strong>: Điểm sáng trong tuần · <strong>Issues</strong>: Vấn đề/trở ngại · <strong>Next Actions</strong>: Ai làm gì, đến bao giờ. Viết ngắn, bullet points.</p>
+            <span class="guide-tip">📝 Mỗi bullet ≤ 1 dòng, dùng số liệu cụ thể</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">2</div>
+            <h4>Auto Data Pull</h4>
+            <p>Hệ thống tự kéo: Rank tracker data, GBP task completion (X/Y done), số Ops cards đang chạy + Overdue, trạng thái CRO experiments.</p>
+            <span class="guide-tip">⚡ Không cần nhập lại — tự động từ các tab khác</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">3</div>
+            <h4>Generate và Copy</h4>
+            <p>Bấm "Generate Report" → Bấm "Copy" → Paste vào Slack/Email gửi CMO. Format đã chuẩn hóa, professional ngay.</p>
+            <span class="guide-tip">📧 Gửi mỗi thứ 6 cuối ngày — best practice</span>
+          </div>
+          <div class="guide-step">
+            <div class="guide-step-num">4</div>
+            <h4>Export Data (Dashboard)</h4>
+            <p>Bấm "Export Data" trên navbar → Download file .txt chứa toàn bộ dữ liệu workspace để lưu trữ hoặc import vào Google Sheets.</p>
+            <span class="guide-tip">💾 Export sau mỗi tuần làm việc để backup</span>
+          </div>
+        </div>
+        <div class="guide-note">
+          <strong>Cấu trúc báo cáo chuẩn:</strong> ① Highlights & Wins ② Issues / Inconsistencies ③ Next Actions (Who/What/When) ④ Workspace Data Pull (tự động)
+        </div>
       </div>
 
       <div class="two-col">
         <div class="panel">
           <div class="form-stack">
             <label>Vertical (Bộ phận)
-              <select id="report-vertical">
-                <option>SEO</option><option>SEM / Performance</option>
-                <option>Social Media</option><option>Email Marketing</option>
-                <option>CRM</option><option>Operations</option>
-              </select>
+              <select id="report-vertical"><option>SEO</option><option>SEM / Performance</option><option>Social Media</option><option>Email Marketing</option><option>CRM</option><option>Operations</option></select>
             </label>
             <label>✅ Highlights (key wins, tiến độ)
               <textarea id="report-highlights" rows="3" placeholder="Key wins, progress, updated cards..."></textarea>
@@ -469,22 +814,20 @@
             <button class="btn-primary full" onclick="generateReport()">📊 Generate Report</button>
           </div>
         </div>
-
         <div class="panel">
           <div class="panel-title">
             <h3>📋 Report Output</h3>
             <button class="btn-ghost" onclick="copyToClipboard('report-output')">⎘ Copy</button>
           </div>
-          <pre class="output" id="report-output">Điền form và bấm Generate Report để tự động pull dữ liệu từ workspace.</pre>
+          <pre class="output" id="report-output">Điền form và bấm Generate Report để tự động pull dữ liệu workspace.</pre>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Footer -->
   <footer>
-    Built by <span>Digital Marketing Workbench</span> · Portfolio Demo · All data stored locally in browser
+    Built by <span>Digital Marketing Workbench</span> · Portfolio Demo · All data stored locally in browser · Powered by GEO & Marketing Skills frameworks
   </footer>
 
   <script src="app.js"></script>
