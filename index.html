@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Digital Marketing Workbench — công cụ SEO, SEM, Content, Analytics, CRO và Reporting tích hợp cho Marketing Executive.">
+  <title>Digital Marketing Workbench · Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <a class="nav-brand" href="#dashboard" onclick="navigateTo('dashboard')">
+      <span class="brand-mark">DM</span>
+      <span>Marketing Workbench</span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#dashboard"   class="nav-link active" data-section="dashboard">📊 Dashboard</a></li>
+      <li><a href="#seo"         class="nav-link"        data-section="seo">✍️ SEO</a></li>
+      <li><a href="#keywords"    class="nav-link"        data-section="keywords">🔑 Keywords</a></li>
+      <li><a href="#channels"    class="nav-link"        data-section="channels">📣 Channels</a></li>
+      <li><a href="#analytics"   class="nav-link"        data-section="analytics">📈 Analytics</a></li>
+      <li><a href="#experiments" class="nav-link"        data-section="experiments">🧪 CRO Tests</a></li>
+      <li><a href="#ops"         class="nav-link"        data-section="ops">⚙️ Ops</a></li>
+      <li><a href="#report"      class="nav-link"        data-section="report">📄 Reports</a></li>
+    </ul>
+    <button class="nav-export" onclick="exportWorkspace()">⬇ Export Data</button>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <main>
+
+    <!-- ==================== DASHBOARD ==================== -->
+    <section id="dashboard" class="section active">
+
+      <!-- Hero -->
+      <div class="hero">
+        <div class="hero-content">
+          <div class="hero-badge">🚀 Portfolio Project · Senior Digital Marketing</div>
+          <h1>All-in-One<br><span>Marketing Workbench</span></h1>
+          <p>Công cụ tích hợp cho SEO, SEM, Content, Analytics, CRO và Ops — xây dựng để demo năng lực Digital Marketing end-to-end.</p>
+          <div class="stat-row">
+            <div class="stat-item"><span class="stat-num">8</span><span class="stat-lbl">Modules</span></div>
+            <div class="stat-item"><span class="stat-num">30+</span><span class="stat-lbl">Tính năng</span></div>
+            <div class="stat-item"><span class="stat-num">100%</span><span class="stat-lbl">Client-side</span></div>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="navigateTo('seo')">✍️ Tạo SEO Brief</button>
+          <button class="btn-secondary" onclick="navigateTo('keywords')">🔑 Map Keywords</button>
+        </div>
+      </div>
+
+      <!-- Campaign Performance + KPI Snapshot -->
+      <div class="dashboard-grid">
+        <div class="panel span-2">
+          <div class="panel-title">
+            <div>
+              <h2>📊 Campaign Performance</h2>
+              <p>Nhập số liệu từ GA4, GSC, Ads Manager để tự động tính KPI.</p>
+            </div>
+          </div>
+          <div class="metric-form">
+            <label>Impressions<input type="number" id="kpi-impressions" value="20000"></label>
+            <label>Clicks<input type="number" id="kpi-clicks" value="760"></label>
+            <label>Leads<input type="number" id="kpi-leads" value="36"></label>
+            <label>Spend (VND)<input type="number" id="kpi-spend" value="2500000"></label>
+            <label>Revenue (VND)<input type="number" id="kpi-revenue" value="12000000"></label>
+          </div>
+          <button class="btn-primary" onclick="calculateKpis()" style="width:100%">⚡ Calculate KPI</button>
+        </div>
+
+        <div class="panel" style="grid-column: 1 / -1">
+          <div class="panel-title">
+            <div>
+              <h2>🎯 KPI Snapshot</h2>
+              <p>CTR · CVR · CPL · ROAS · CPC và action recommendations.</p>
+            </div>
+          </div>
+          <div class="metric-cards" id="kpi-results"></div>
+          <div class="insight-box" id="kpi-insight"></div>
+        </div>
+      </div>
+
+      <!-- Skill Matrix -->
+      <div class="panel">
+        <div class="panel-title">
+          <div>
+            <h2>🧠 Skill Coverage Matrix</h2>
+            <p>Các kỹ năng được demo trong workbench này, map từ JD Digital Marketing tiêu chuẩn.</p>
+          </div>
+        </div>
+        <div class="skill-grid" id="skill-grid"></div>
+      </div>
+    </section>
+
+    <!-- ==================== SEO ==================== -->
+    <section id="seo" class="section">
+      <div class="section-header">
+        <span class="eyebrow">✍️ SEO + Content Marketing</span>
+        <h2>SEO Brief & Audit Workspace</h2>
+        <p>Tạo content brief chuẩn AI/GEO, outline bài viết và kiểm tra checklist kỹ thuật SEO đầy đủ.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-title"><h3>📝 SEO Content Brief</h3></div>
+          <div class="form-stack">
+            <label>Primary keyword
+              <input id="brief-keyword" placeholder="VD: dịch vụ SEO local">
+            </label>
+            <label>Target audience
+              <input id="brief-audience" placeholder="VD: owner SME, marketing manager">
+            </label>
+            <label>Business goal
+              <select id="brief-goal">
+                <option value="lead">Generate leads</option>
+                <option value="traffic">Grow organic traffic</option>
+                <option value="local">Improve local visibility</option>
+                <option value="brand">Build digital brand</option>
+              </select>
+            </label>
+            <label>Secondary keywords
+              <textarea id="brief-secondary" rows="4" placeholder="Mỗi keyword một dòng"></textarea>
+            </label>
+            <button class="btn-primary full" onclick="generateContentBrief()">✨ Generate Brief</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">
+            <h3>📄 Generated Output</h3>
+            <button class="btn-ghost" onclick="copyToClipboard('brief-output')">⎘ Copy</button>
+          </div>
+          <pre class="output" id="brief-output">Nhập thông tin và bấm Generate Brief.</pre>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title"><h3>✅ SEO Audit Checklist</h3></div>
+        <div class="check-grid" id="seo-checklist"></div>
+      </div>
+    </section>
+
+    <!-- ==================== KEYWORDS ==================== -->
+    <section id="keywords" class="section">
+      <div class="section-header">
+        <span class="eyebrow">🔑 Keyword Research</span>
+        <h2>Keyword Intent Mapper</h2>
+        <p>Phân loại keyword theo intent, funnel stage và recommended asset để phân bổ ngân sách content/ads đúng mục tiêu.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <div class="form-stack">
+            <label>Keyword list (mỗi từ khóa một dòng)
+              <textarea id="keyword-input" rows="14" placeholder="seo là gì&#10;bảng giá dịch vụ seo&#10;công ty seo tphcm&#10;cách tối ưu google business profile&#10;mua phần mềm seo"></textarea>
+            </label>
+          </div>
+          <button class="btn-primary full" style="margin-top:0.9rem" onclick="mapKeywords()">🗂 Map Keywords</button>
+        </div>
+        <div class="panel">
+          <div class="panel-title">
+            <h3>📊 Intent Table</h3>
+            <button class="btn-ghost" onclick="copyTable('keyword-table')">⎘ Copy Table</button>
+          </div>
+          <div class="table-wrap">
+            <table id="keyword-table">
+              <thead>
+                <tr>
+                  <th>Keyword</th>
+                  <th>Intent</th>
+                  <th>Funnel</th>
+                  <th>Recommended Asset</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CHANNELS ==================== -->
+    <section id="channels" class="section">
+      <div class="section-header">
+        <span class="eyebrow">📣 SEM · Social · Email</span>
+        <h2>Channel Planning Tools</h2>
+        <p>Lập kế hoạch đa kênh: SEM campaign, social content calendar và email nurture sequence builder.</p>
+      </div>
+
+      <div class="three-col">
+        <div class="panel">
+          <div class="panel-title"><h3>🔍 SEM Campaign Planner</h3></div>
+          <div class="form-stack">
+            <label>Platform
+              <select id="sem-platform"><option>Google Ads</option><option>Meta Ads</option><option>LinkedIn Ads</option><option>TikTok Ads</option></select>
+            </label>
+            <label>Objective
+              <select id="sem-objective"><option>Leads</option><option>Traffic</option><option>Awareness</option><option>Sales</option></select>
+            </label>
+            <label>Offer
+              <input id="sem-offer" placeholder="VD: free consultation, promo">
+            </label>
+            <label>Budget / month (VND)
+              <input id="sem-budget" type="number" placeholder="VD: 5000000">
+            </label>
+            <button class="btn-primary full" onclick="generateSemPlan()">🚀 Create SEM Plan</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title"><h3>📅 Social Calendar</h3></div>
+          <div class="form-stack">
+            <label>Platform
+              <select id="social-platform"><option>LinkedIn</option><option>Facebook</option><option>Instagram</option><option>TikTok</option><option>Twitter/X</option></select>
+            </label>
+            <label>Content pillar
+              <input id="social-pillar" placeholder="VD: educational, brand, case study">
+            </label>
+            <label>Goal
+              <select id="social-goal"><option>Awareness</option><option>Engagement</option><option>Traffic</option><option>Leads</option></select>
+            </label>
+            <button class="btn-primary full" onclick="generateSocialPlan()" style="margin-top:auto">📆 Create Calendar</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title"><h3>📧 Email Sequence</h3></div>
+          <div class="form-stack">
+            <label>Sequence type
+              <select id="email-type"><option>Welcome</option><option>Lead nurture</option><option>Re-engagement</option><option>Post-purchase</option></select>
+            </label>
+            <label>Trigger
+              <input id="email-trigger" placeholder="VD: form submit, download guide">
+            </label>
+            <label>Conversion goal
+              <input id="email-goal" placeholder="VD: book consultation, request quote">
+            </label>
+            <button class="btn-primary full" onclick="generateEmailPlan()" style="margin-top:auto">✉️ Create Sequence</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">
+          <h3>📋 Channel Output</h3>
+          <button class="btn-ghost" onclick="copyToClipboard('channel-output')">⎘ Copy</button>
+        </div>
+        <pre class="output short" id="channel-output">Kết quả channel planner sẽ hiển thị ở đây sau khi bấm nút tương ứng.</pre>
+      </div>
+    </section>
+
+    <!-- ==================== ANALYTICS ==================== -->
+    <section id="analytics" class="section">
+      <div class="section-header">
+        <span class="eyebrow">📈 GA4 · GSC · Ads Manager</span>
+        <h2>Analytics & Tracking Builder</h2>
+        <p>Build UTM link chuẩn naming convention và tracking plan cho dev gắn GTM — nguyên tắc: track for decisions, no PII.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-title"><h3>🔗 UTM Builder</h3></div>
+          <div class="form-stack">
+            <label>Final URL
+              <input id="utm-url" placeholder="https://example.com/landing-page">
+            </label>
+            <label>Source
+              <input id="utm-source" placeholder="google · facebook · newsletter">
+            </label>
+            <label>Medium
+              <input id="utm-medium" placeholder="cpc · social · email">
+            </label>
+            <label>Campaign
+              <input id="utm-campaign" placeholder="summer_promo_2026">
+            </label>
+            <label>Content (optional)
+              <input id="utm-content" placeholder="hero_cta · carousel_01">
+            </label>
+            <button class="btn-primary full" onclick="buildUtm()">⚡ Build UTM</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">
+            <h3>📋 Tracking Plan</h3>
+            <button class="btn-ghost" onclick="addTrackingEvent()">+ Add Event</button>
+          </div>
+          <div class="inline-form tracking-form">
+            <input id="track-event"    placeholder="event_name">
+            <input id="track-trigger"  placeholder="Trigger">
+            <input id="track-props"    placeholder="Properties">
+            <input id="track-decision" placeholder="Decision supported">
+          </div>
+          <div class="table-wrap">
+            <table id="tracking-table">
+              <thead>
+                <tr><th>Event</th><th>Trigger</th><th>Properties</th><th>Decision</th><th></th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">
+          <h3>🔗 Generated UTM</h3>
+          <button class="btn-ghost" onclick="copyToClipboard('utm-output')">⎘ Copy</button>
+        </div>
+        <pre class="output short" id="utm-output">UTM URL sẽ hiển thị ở đây sau khi build.</pre>
+      </div>
+    </section>
+
+    <!-- ==================== CRO TESTS ==================== -->
+    <section id="experiments" class="section">
+      <div class="section-header">
+        <span class="eyebrow">🧪 CRO · A/B Testing</span>
+        <h2>Experiment Backlog</h2>
+        <p>Thiết kế giả thuyết, chấm điểm ICE (Impact · Confidence · Ease) và ưu tiên thử nghiệm nào làm trước.</p>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title"><h3>➕ Add Experiment</h3></div>
+        <div class="inline-form experiment-form">
+          <input id="exp-name"        placeholder="Experiment name">
+          <input id="exp-observation" placeholder="Because [data/observation]">
+          <input id="exp-change"      placeholder="We believe [change]">
+          <input id="exp-metric"      placeholder="Primary metric">
+          <input id="exp-impact"      type="number" min="1" max="10" placeholder="Impact (1-10)">
+          <input id="exp-confidence"  type="number" min="1" max="10" placeholder="Confidence (1-10)">
+          <input id="exp-ease"        type="number" min="1" max="10" placeholder="Ease (1-10)">
+          <button class="btn-primary" onclick="addExperiment()">+ Add Test</button>
+        </div>
+        <div class="table-wrap">
+          <table id="experiment-table">
+            <thead>
+              <tr><th>Experiment</th><th>Hypothesis</th><th>Metric</th><th>ICE Score</th><th>Status</th><th></th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== OPS ==================== -->
+    <section id="ops" class="section">
+      <div class="section-header">
+        <span class="eyebrow">⚙️ SEO Ops · Local SEO · Vertical Cards</span>
+        <h2>Operations Workspace</h2>
+        <p>Theo dõi thứ hạng keyword, kiểm tra tiến độ GBP các chi nhánh và quản lý task card liên phòng ban.</p>
+      </div>
+
+      <!-- Rank Tracker -->
+      <div class="panel">
+        <div class="panel-title"><h3>📉 Keyword Rank Tracker</h3></div>
+        <div class="inline-form rank-form">
+          <input id="rank-keyword"  placeholder="Keyword">
+          <input id="rank-url"      placeholder="Target URL">
+          <input id="rank-current"  type="number" placeholder="Current rank">
+          <input id="rank-previous" type="number" placeholder="Previous rank">
+          <input id="rank-note"     placeholder="Note / action">
+          <button class="btn-primary" onclick="addRankRow()">+ Add</button>
+        </div>
+        <div class="table-wrap">
+          <table id="rank-table">
+            <thead>
+              <tr><th>Keyword</th><th>URL</th><th>Current</th><th>Previous</th><th>Change</th><th>Status</th><th>Note</th><th></th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- GBP + Ops Cards -->
+      <div class="split-panels">
+        <div class="panel">
+          <div class="panel-title"><h3>📍 GBP Branch Checklist</h3></div>
+          <div class="inline-form compact-form">
+            <input id="gbp-branch" placeholder="Branch name">
+            <select id="gbp-task">
+              <option>NAP consistency</option>
+              <option>Primary category</option>
+              <option>Photos updated</option>
+              <option>Weekly GBP post</option>
+              <option>Review response</option>
+              <option>Q&A updated</option>
+            </select>
+            <select id="gbp-status">
+              <option>Pending</option>
+              <option>In progress</option>
+              <option>Done</option>
+              <option>Blocked</option>
+            </select>
+            <input id="gbp-owner" placeholder="Owner">
+            <button class="btn-primary" onclick="addGbpTask()">+ Add</button>
+          </div>
+          <div class="table-wrap">
+            <table id="gbp-table">
+              <thead>
+                <tr><th>Branch</th><th>Task</th><th>Status</th><th>Owner</th><th>Updated</th><th></th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title"><h3>🗂 Vertical Card Monitor</h3></div>
+          <div class="inline-form compact-form">
+            <input id="card-title" placeholder="Card title">
+            <select id="card-vertical">
+              <option>SEO</option><option>SEM</option><option>Social</option>
+              <option>Email</option><option>CRM</option><option>Performance</option>
+              <option>Xsell / Sales / Growth</option>
+            </select>
+            <select id="card-process">
+              <option>Update</option><option>RAF</option>
+              <option>+1 Review</option><option>Forecast</option><option>Post-mortem</option>
+            </select>
+            <input id="card-owner" placeholder="Owner">
+            <input id="card-due"   type="date">
+            <button class="btn-primary" onclick="addOpsCard()">+ Add</button>
+          </div>
+          <div class="table-wrap">
+            <table id="ops-table">
+              <thead>
+                <tr><th>Card</th><th>Vertical</th><th>Process</th><th>Owner</th><th>Due</th><th>Flag</th><th></th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== REPORTS ==================== -->
+    <section id="report" class="section">
+      <div class="section-header">
+        <span class="eyebrow">📄 Documentation · Reporting</span>
+        <h2>Weekly Insight Report Generator</h2>
+        <p>Tạo báo cáo ngắn cho manager hoặc CMO: highlights, blockers, inconsistencies, insights và next actions — tự động pull dữ liệu workspace.</p>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <div class="form-stack">
+            <label>Vertical (Bộ phận)
+              <select id="report-vertical">
+                <option>SEO</option><option>SEM / Performance</option>
+                <option>Social Media</option><option>Email Marketing</option>
+                <option>CRM</option><option>Operations</option>
+              </select>
+            </label>
+            <label>✅ Highlights (key wins, tiến độ)
+              <textarea id="report-highlights" rows="3" placeholder="Key wins, progress, updated cards..."></textarea>
+            </label>
+            <label>⚠️ Issues / Inconsistencies
+              <textarea id="report-issues" rows="3" placeholder="Missing RAF, delayed update, owner unclear..."></textarea>
+            </label>
+            <label>➡️ Next Actions (Who / What / When)
+              <textarea id="report-actions" rows="3" placeholder="Who does what by when"></textarea>
+            </label>
+            <button class="btn-primary full" onclick="generateReport()">📊 Generate Report</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">
+            <h3>📋 Report Output</h3>
+            <button class="btn-ghost" onclick="copyToClipboard('report-output')">⎘ Copy</button>
+          </div>
+          <pre class="output" id="report-output">Điền form và bấm Generate Report để tự động pull dữ liệu từ workspace.</pre>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    Built by <span>Digital Marketing Workbench</span> · Portfolio Demo · All data stored locally in browser
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
